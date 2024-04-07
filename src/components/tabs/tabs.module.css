@@ -1,0 +1,26 @@
+.tabs{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.tab{
+    padding: 1rem 2rem;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all .2s;
+}
+.tab:hover{
+    background-color: #DEDEDE;
+}
+
+.tab-selected{
+    border-bottom: 1px solid blue;
+}
+
+.tabLabel{
+    color: #DEDEDE;
+}
+.tabLabel__selected{
+    color: blue;
+}
