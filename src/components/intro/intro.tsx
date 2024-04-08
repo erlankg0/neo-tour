@@ -15,7 +15,7 @@ const Intro = () => {
                                 Enjoy the best experience with us!
                             </p>
                         </div>
-                        <img src={imageIntro} alt={'into Person image'}/>
+                        <img className={styles.image} src={imageIntro} alt={'into Person image'}/>
                     </div>
                     <div className={styles.button}>Let’s Go!<ArrowRightOutlined /></div>
                 </div>

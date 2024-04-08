@@ -1,13 +1,11 @@
 import './App.css'
 import Intro from "../../components/intro/intro.tsx";
-import TabsContent from "../Tabs/Tabs.tsx";
 
-function App() {
+const  App = () => {
 
     return (
         <div>
             <Intro/>
-            <TabsContent/>
         </div>
     )
 }
