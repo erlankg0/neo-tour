@@ -1,13 +1,13 @@
 import './App.css'
 import Intro from "../../components/intro/intro.tsx";
-import TabsContent from "../Tabs/Tabs.tsx";
+import Tabs from "../Tabs/Tabs.tsx";
 
 function App() {
 
     return (
         <div>
             <Intro/>
-            <TabsContent/>
+            <Tabs/>
         </div>
     )
 }

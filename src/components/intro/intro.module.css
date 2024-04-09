@@ -1,8 +1,8 @@
 .header {
     background: linear-gradient(#DEDEDE, #ffff);
-    height: 80vh;
     display: flex;
     align-items: center;
+    padding: 10rem 0;
 }
 
 .header__body{
