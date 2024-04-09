@@ -11,7 +11,7 @@ interface ICard {
 
 const CardItem: React.FC<ICard> = ({title, url}) => {
     return (
-        <NavLink to={url} className={styles.card}>
+        <NavLink to={`/detail/${url}`} className={styles.card}>
             <img src={cardImage} alt={title}/>
             <div className={styles.overlay}>
                 <p>{title}</p>

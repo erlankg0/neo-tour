@@ -1,13 +1,16 @@
 import './App.css'
-import Intro from "../../components/intro/intro.tsx";
-import TabsContent from "../Tabs/Tabs.tsx";
+import {Route, Routes} from "react-router-dom";
+import Index from "./../Index/Index.tsx";
+import Detail from "../Detail/Detail.tsx";
 
 function App() {
 
     return (
         <div>
-            <Intro/>
-            <TabsContent/>
+            <Routes>
+                <Route path={'/'} element={<Index/>}/>
+                <Route path={'/detail/:id'} element={<Detail/>}/>
+            </Routes>
         </div>
     )
 }

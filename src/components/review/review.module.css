@@ -1,0 +1,35 @@
+.content{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.top{
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+
+    align-items: center;
+}
+
+.image{
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.user{
+    font-family: Satoshi;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+}
+
+.bottom{
+    display: flex;
+
+}
