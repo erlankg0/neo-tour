@@ -1,9 +1,5 @@
 .header {
     background: linear-gradient(#DEDEDE, #ffff);
-<<<<<<< HEAD
-    padding: 10rem 0;
-=======
->>>>>>> dev
     display: flex;
     align-items: center;
     padding: 10rem 0;
@@ -68,18 +64,4 @@
     flex-direction: row;
     gap: 2rem;
     align-items: center;
-}
-
-@media (max-width: 768px) {
-    .content{
-        flex-direction: column;
-    }
-
-    .image{
-        width: 100%;
-    }
-    .title{
-        font-size: 3rem;
-    }
-
 }
