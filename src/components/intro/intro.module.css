@@ -1,8 +1,12 @@
 .header {
     background: linear-gradient(#DEDEDE, #ffff);
+<<<<<<< HEAD
     padding: 10rem 0;
+=======
+>>>>>>> dev
     display: flex;
     align-items: center;
+    padding: 10rem 0;
 }
 
 .header__body{

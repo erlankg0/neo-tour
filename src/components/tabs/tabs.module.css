@@ -1,26 +1,30 @@
-.tabs{
+.Tabs {
     display: flex;
     flex-direction: row;
+    gap: 3rem;
     align-items: flex-start;
 }
 
-.tab{
-    padding: 1rem 2rem;
+.Tab {
+    padding: 1.6rem 2.4rem;
     border: 1px solid transparent;
     cursor: pointer;
-    transition: all .2s;
-}
-.tab:hover{
-    background-color: #DEDEDE;
+    transition: all .15s;
 }
 
-.tab-selected{
+.Tab__selected {
     border-bottom: 1px solid blue;
 }
 
-.tabLabel{
-    color: #DEDEDE;
+.Tab__selected:hover {
+    background-color: #DEDEDE;
 }
-.tabLabel__selected{
-    color: blue;
+.TabLabel {
+    color: #6A62B7;
+    font-family: Satoshi sans-serif;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+
 }
