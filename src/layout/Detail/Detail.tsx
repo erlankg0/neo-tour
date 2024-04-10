@@ -1,12 +1,16 @@
 import BgImage from './../../assets/image/bgImage.jpg';
 import styles from './detail.module.css';
 import {useNavigate} from "react-router-dom";
-import {ArrowLeftOutlined} from "@ant-design/icons";
+import {ArrowLeftOutlined, CloseOutlined} from "@ant-design/icons";
 import {Typography} from "antd";
 import pin from './../../assets/icon/pin.svg';
 import {IReview} from "../../components/review/review.tsx";
 import Reviews from "../Reviews/reviews.tsx";
-import Button from "../../components/button/button.tsx";
+import ButtonUI from "../../components/button/button.tsx";
+import {Modal} from "antd";
+import {useState} from "react";
+import ModalContent from "../../components/modalContent/modalContent.tsx";
+import {Button} from "antd";
 
 const Detail = () => {
     const navigate = useNavigate();
@@ -15,6 +19,24 @@ const Detail = () => {
         navigate(-1);
     }
     const users: IReview[] = [{username: 'Erlan', img: '', comment: 'Рандомный комент азазазза'}]
+
+    const [open, setOpen] = useState(false);
+    const [confirmLoading, setConfirmLoading] = useState(false);
+    const handleShowModal = () => {
+        setOpen(true);
+    }
+    const handleOK = () => {
+        setConfirmLoading(true);
+        setTimeout(() => {
+            setOpen(false);
+            setConfirmLoading(false)
+        }, 2000)
+    }
+
+    const handleCancel = () => {
+        console.log('Clicked cancel button');
+        setOpen(false);
+    }
 
     return (
         <header className={styles.content}>
@@ -54,7 +76,29 @@ const Detail = () => {
                     </div>
                 </div>
             </section>
-            <Button text={'Book now'}/>
+            {/*Modal*/}
+
+            <Modal
+                title={<p>Info</p>}
+                visible={open}
+                onOk={handleOK}
+                confirmLoading={confirmLoading}
+                onCancel={handleCancel}
+                footer={[
+                    <Button key="submit" type="primary" loading={confirmLoading} onClick={handleOK} style={{width: '100%'}}>
+                        OK
+                    </Button>,
+                ]}
+                closeIcon={<CloseOutlined />} // Add the close button icon
+            >
+                <ModalContent />
+            </Modal>
+
+
+            <ButtonUI text={'Book now'} onClick={handleShowModal}/>
+
+            {/*Modal*/}
+
         </header>
     )
 }

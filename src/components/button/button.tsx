@@ -1,12 +1,15 @@
 import styles from './button.module.css'
+import React from "react";
+
 interface IButton {
-    text: string
+    text: string,
+    onClick: () => void,
 }
 
-const ButtonComponent: React.FC<IButton> = ({text}) => {
+const ButtonComponent: React.FC<IButton> = ({text, onClick}) => {
     return (
         <div className={'container'}>
-            <button className={styles.button}>{text}</button>
+            <button onClick={onClick} className={styles.button}>{text}</button>
         </div>
     )
 }

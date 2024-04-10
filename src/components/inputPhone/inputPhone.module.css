@@ -1,0 +1,17 @@
+.input{
+    width: 100% !important;
+    color: #888;
+    font-family: Satoshi;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+.content{
+    width: 100%;
+    display: flex;
+    border-radius: 1rem;
+}
+.countries{
+    background-color: transparent;
+}
