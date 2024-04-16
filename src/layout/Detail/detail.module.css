@@ -24,7 +24,8 @@
     cursor: pointer;
     align-items: center;
 }
-.content{
+
+.content {
     display: flex;
     flex-direction: column;
     gap: 4rem;
@@ -32,7 +33,7 @@
     padding-bottom: 4rem;
 }
 
-.paragraph{
+.paragraph {
     display: flex;
     flex-direction: row;
     gap: 1rem;
@@ -40,4 +41,15 @@
 
     font-family: Satoshi;
     font-size: 1.8rem;
+}
+
+.buttonModal {
+    color: #FFF;
+
+    font-family: Satoshi;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
 }

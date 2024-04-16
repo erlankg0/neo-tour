@@ -6,6 +6,7 @@ import './tabs.module.css'
 interface ITab {
     id: string,
     label: string,
+    data: string
 }
 
 interface ITabs {

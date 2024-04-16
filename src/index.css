@@ -5,7 +5,10 @@
     url("./assets/fonts/Satoshi-Bold.woff") format('woff'),
     url("./assets/fonts/Satoshi-Bold.woff2") format('woff2'),
     url("./assets/fonts/Satoshi-Regular.woff") format('woff'),
-    url("./assets/fonts/Satoshi-Regular.woff2") format('woff2');
+    url("./assets/fonts/Satoshi-Regular.woff2") format('woff2'),
+    url("./assets/fonts/Satoshi-Light.woff") format('woff'),
+    url("./assets/fonts/Satoshi-Light.woff2") format('woff2');
+
     font-weight: normal;
     font-style: normal;
 }

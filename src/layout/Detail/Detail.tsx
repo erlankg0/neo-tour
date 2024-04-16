@@ -39,15 +39,15 @@ const Detail = () => {
     }
 
     return (
-        <header className={styles.content}>
-            <div className={styles.intro} style={{backgroundImage: `url(${BgImage})`}}>
+        <div className={styles.content}>
+            <header className={styles.intro} style={{backgroundImage: `url(${BgImage})`}}>
                 <div className="container">
                     <button className={styles.prev} onClick={handlePrevPage}>
                         <ArrowLeftOutlined style={{color: 'white', fontFamily: 'Satoshi', fontSize: '1.8rem'}}/>
                         Back
                     </button>
                 </div>
-            </div>
+            </header>
             <section>
                 <div className={'container'}>
                     <div className={styles.content}>
@@ -84,14 +84,16 @@ const Detail = () => {
                 onOk={handleOK}
                 confirmLoading={confirmLoading}
                 onCancel={handleCancel}
+                centered
                 footer={[
-                    <Button key="submit" type="primary" loading={confirmLoading} onClick={handleOK} style={{width: '100%'}}>
+                    <Button key="submit" type="primary" loading={confirmLoading} onClick={handleOK} disabled={true}
+                            style={{width: '100%', height: '4.4rem', backgroundColor: '#6A62B7', borderRadius: '2rem', color:'white'}} className={styles.buttonModal}>
                         OK
                     </Button>,
                 ]}
-                closeIcon={<CloseOutlined />} // Add the close button icon
+                closeIcon={<CloseOutlined/>} // Add the close button icon
             >
-                <ModalContent />
+                <ModalContent/>
             </Modal>
 
 
@@ -99,7 +101,7 @@ const Detail = () => {
 
             {/*Modal*/}
 
-        </header>
+        </div>
     )
 }
 

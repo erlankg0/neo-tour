@@ -7,6 +7,7 @@ interface IInput {
 }
 
 const InputRemark: React.FC<IInput> = ({value, onChange}) => {
+    console.log(value)
     return (
         <input type={'text'} className={styles.input} placeholder={'Write your wishes to trip...'} value={value}
                onChange={onChange}/>
