@@ -1,12 +1,12 @@
 import Intro from "../../components/intro/intro.tsx";
-import TabsContent from "../Tabs/Tabs.tsx";
 import CardList from "../Cards/CardList.tsx";
+import Discover from "../../components/tabs/Discover.tsx";
 
 const Index = () => {
     return (
         <div>
             <Intro/>
-            <TabsContent/>
+            <Discover id={'tabs'}/>
             <CardList/>
         </div>
     )

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import {Typography} from "antd";
 import classNames from "classnames";
-import Tabs, {ITab} from "../../components/tabs/tabs.tsx";
+import Tabs, {ITab} from "../../components/tabs/Discover.tsx";
 import styles from './tabs.module.css'
 
 const TabsLayout: React.FC = () => {

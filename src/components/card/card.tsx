@@ -1,22 +1,18 @@
 import React from "react";
 import styles from "./card.module.css";
-import cardImage from './../../assets/image/Illustration.svg'
-import {NavLink} from "react-router-dom";
+import personImage from "../../assets/image/bgImage.jpg";
 
 interface ICard {
-    url: string,
     image: string,
     title: string
 }
 
-const CardItem: React.FC<ICard> = ({title, url}) => {
+const CardItem: React.FC<ICard> = ({title}) => {
     return (
-        <NavLink to={`/detail/${url}`} className={styles.card}>
-            <img src={cardImage} alt={title}/>
-            <div className={styles.overlay}>
-                <p>{title}</p>
-            </div>
-        </NavLink>
+        <div className={styles.imgCard}>
+            <img className={styles.img} src={personImage} alt=""/>
+            <p>{title}</p>
+        </div>
     )
 }
 

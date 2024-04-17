@@ -1,0 +1,74 @@
+.discoverPage {
+    padding: 1.5rem;
+    text-align: left;
+    max-width: 100%;
+    height: fit-content;
+    flex-flow: column;
+}
+
+.discoverTitleGroup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.arrow-group {
+    display: flex;
+}
+
+.arrow {
+    margin-left: 20px;
+    width: 56px;
+    height: 56px;
+    cursor: pointer;
+}
+
+.category {
+    display: flex;
+    flex-direction: row;
+    gap: 5rem;
+    list-style: none;
+    padding: 0;
+}
+
+.categoryLink {
+    display: flex;
+    color: rgba(0, 0, 0, 0.91);
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: 20px;
+    background: none;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+}
+
+.categoryLink:hover {
+    color: #6A62B7;
+}
+
+.categoryLink.active {
+    text-decoration: underline;
+    color: #6A62B7;
+    text-shadow: 0 4px 4px rgba(0, 0, 0, .25);
+
+}
+
+.title {
+    text-shadow: 0 4px 4px rgba(0, 0, 0, .25);
+    color: black;
+}
+
+.discoverListWrapper {
+    margin-top: 3rem;
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 100%;
+    gap: 3rem;
+
+}
+
+.discoverImgGroup {
+    display: flex;
+    max-width: 420px;
+}
