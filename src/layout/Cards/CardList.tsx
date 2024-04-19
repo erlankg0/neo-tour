@@ -7,11 +7,10 @@ const CardList = () => {
     const [cards, setCards] = useState<ICard[]>([]);
 
     useEffect(() => {
-        setCards([...cards, {title: 'Greenough, Montana', image: '', url: '1'}, {
+        setCards([...cards, {title: 'Greenough, Montana', image: ''}, {
             title: 'Greenough, Montana',
             image: '',
-            url: '2'
-        }, {title: 'Greenough, Montana', image: '', url: '3'}, {title: 'Greenough, Montana', image: '4', url: ''}])
+        }, {title: 'Greenough, Montana', image: ''}, {title: 'Greenough, Montana', image: '4'}])
     }, [])
 
     return (
@@ -19,7 +18,7 @@ const CardList = () => {
             <Typography.Title className={'title'}>Recommended</Typography.Title>
             <div className={styles.cards}>
                 {cards.map((card, index) => (
-                    <CardItem key={index} title={card.title} url={card.url} image={card.image}/>
+                    <CardItem key={index} title={card.title} image={card.image}/>
                 ))}
             </div>
         </div>

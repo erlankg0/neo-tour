@@ -2,15 +2,13 @@ import BgImage from './../../assets/image/bgImage.jpg';
 import styles from './detail.module.css';
 import {useNavigate} from "react-router-dom";
 import {ArrowLeftOutlined, CloseOutlined} from "@ant-design/icons";
-import {Typography} from "antd";
+import {Button, Modal, Typography} from "antd";
 import pin from './../../assets/icon/pin.svg';
 import {IReview} from "../../components/review/review.tsx";
 import Reviews from "../Reviews/reviews.tsx";
 import ButtonUI from "../../components/button/button.tsx";
-import {Modal} from "antd";
 import {useState} from "react";
 import ModalContent from "../../components/modalContent/modalContent.tsx";
-import {Button} from "antd";
 
 const Detail = () => {
     const navigate = useNavigate();
@@ -20,19 +18,26 @@ const Detail = () => {
     }
     const users: IReview[] = [{username: 'Erlan', img: '', comment: 'Рандомный комент азазазза'}]
 
-    const [open, setOpen] = useState(false);
-    const [confirmLoading, setConfirmLoading] = useState(false);
+    const [open, setOpen] = useState<boolean>(false);
+    const [openDoneModal, setOpenDoneModal] = useState<boolean>(false);
+    const [confirmLoading, setConfirmLoading] = useState<boolean>(false);
+    const [isGood, setGood] = useState<boolean>(true);
     const handleShowModal = () => {
         setOpen(true);
     }
     const handleOK = () => {
         setConfirmLoading(true);
-        setTimeout(() => {
-            setOpen(false);
-            setConfirmLoading(false)
-        }, 2000)
+        setOpen(false);
+        setConfirmLoading(false)
+        setOpenDoneModal(true);
     }
 
+    const handeDoneClose = () => {
+        setOpenDoneModal(false);
+    }
+    const handleDoneCancel = () =>{
+        setOpenDoneModal(false);
+    }
     const handleCancel = () => {
         console.log('Clicked cancel button');
         setOpen(false);
@@ -77,7 +82,6 @@ const Detail = () => {
                 </div>
             </section>
             {/*Modal*/}
-
             <Modal
                 title={<p>Info</p>}
                 visible={open}
@@ -86,9 +90,18 @@ const Detail = () => {
                 onCancel={handleCancel}
                 centered
                 footer={[
-                    <Button key="submit" type="primary" loading={confirmLoading} onClick={handleOK} disabled={true}
-                            style={{width: '100%', height: '4.4rem', backgroundColor: '#6A62B7', borderRadius: '2rem', color:'white'}} className={styles.buttonModal}>
-                        OK
+                    <Button key="submit" type="primary" loading={confirmLoading} onClick={handleOK}
+                            style={{
+                                width: '100%',
+                                height: '4.4rem',
+                                backgroundColor: '#6A62B7',
+                                borderRadius: '2rem',
+                                color: 'white'
+                            }} onSubmit={() => {
+                        setOpenDoneModal(true)
+                        setGood(false);
+                    }} className={styles.buttonModal}>
+                        Book
                     </Button>,
                 ]}
                 closeIcon={<CloseOutlined/>} // Add the close button icon
@@ -96,6 +109,29 @@ const Detail = () => {
                 <ModalContent/>
             </Modal>
 
+            {/* Modal Done*/}
+
+            <Modal
+                onCancel={handleDoneCancel}
+                visible={openDoneModal}
+                centered
+                footer={[<Button key="submit" type="primary" onClick={handeDoneClose}
+                                 style={{
+                                     width: '100%',
+                                     height: '4.4rem',
+                                     backgroundColor: '#6A62B7',
+                                     borderRadius: '2rem',
+                                     color: 'white'
+                                 }} onSubmit={() => setOpenDoneModal(true)} className={styles.buttonModal}>
+                    OK
+                </Button>]}
+            >
+                {
+                    isGood ? <Typography.Title className={styles.title}>Your trip has been booked!</Typography.Title> :
+                        <Typography.Title className={styles.title}>The tour can’t be booked</Typography.Title>
+                }
+            </Modal>
+            {/* end Modal Done*/}
 
             <ButtonUI text={'Book now'} onClick={handleShowModal}/>
 
