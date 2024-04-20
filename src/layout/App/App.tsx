@@ -2,8 +2,7 @@ import './App.css'
 import {Route, Routes} from "react-router-dom";
 import Index from "./../Index/Index.tsx";
 import Detail from "../Detail/Detail.tsx";
-
-function App() {
+const App = () => {
 
     return (
         <div>

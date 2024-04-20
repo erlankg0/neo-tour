@@ -4,14 +4,37 @@ import InputRemark from "../input/input.tsx";
 import {Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
 import Counter from "../counter/counter.tsx";
+import {Button} from "antd";
+import React from "react";
 
-const ModalContent = () => {
+interface IModal {
+    confirmLoading: boolean,
+    handleOK: () => void,
+    setOpenDoneModal: (open: boolean) => void,
+    setGood: (isGood: boolean) => void,
+    phoneNumber: string,
+    comment: string,
+    handlePhoneNumber: (phone: string) => void,
+    handleCommentOrder: (comment: string) => void
+
+}
+
+const ModalContent: React.FC<IModal> = ({
+                                            confirmLoading,
+                                            handleOK,
+                                            setOpenDoneModal,
+                                            setGood,
+                                            phoneNumber,
+                                            comment,
+                                            handleCommentOrder,
+                                            handlePhoneNumber
+                                        }) => {
 
     return (
         <Formik
             initialValues={{
-                phone: '',
-                comment: '',
+                phone: phoneNumber,
+                comment: comment,
                 count: 0,
             }}
             validationSchema={Yup.object().shape({
@@ -25,7 +48,7 @@ const ModalContent = () => {
                 console.log(values.count, 'PAX');
                 resetForm();
             }}>
-            {({values}) => (
+            {() => (
                 <Form className={styles.content}>
                     <h3 className={styles.paragraph}>
                         To submit an application for a tour reservation,
@@ -33,16 +56,31 @@ const ModalContent = () => {
                         the number of people for the reservation
                     </h3>
                     <div className={styles.field}>
-                        <label className={styles.label} htmlFor={'phone'}>Phone number</label>
-                        <Field type={'input'} as={InputPhone} name={'phone'}/>
+                        <label className={styles.label} htmlFor={'phone'}>Phone</label>
+                        <Field type={'input'} as={InputPhone} phoneNumber={phoneNumber}
+                               setPhoneNumber={handlePhoneNumber} name={'phone'}/>
                     </div>
                     <div className={styles.field}>
                         <label className={styles.label} htmlFor={'phone'}>Commentaries to trip</label>
-                        <Field type={'input'} as={InputRemark} value={values.comment} name={'comment'}/>
+                        <Field type={'input'} as={InputRemark} handleCommentOrder={handleCommentOrder} value={comment}
+                               name={'comment'}/>
                     </div>
                     <div className={styles.field}>
                         <Counter/>
                     </div>
+                    <Button htmlType={'submit'} key="submit" type="primary" loading={confirmLoading} onClick={handleOK}
+                            style={{
+                                width: '100%',
+                                height: '4.4rem',
+                                backgroundColor: '#6A62B7',
+                                borderRadius: '2rem',
+                                color: 'white'
+                            }} onSubmit={() => {
+                        setOpenDoneModal(true)
+                        setGood(false);
+                    }} className={styles.buttonModal}>
+                        Book
+                    </Button>
                 </Form>
             )}
         </Formik>

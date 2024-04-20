@@ -3,9 +3,14 @@ import App from './layout/App/App.tsx'
 import './index.css'
 import './normalize.css'
 import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
+import store from './redux/store.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-    <BrowserRouter>
-        <App/>
-    </BrowserRouter>,
+    <Provider store={store}>
+        <BrowserRouter>
+            <App/>
+        </BrowserRouter>
+    </Provider>
+    ,
 )

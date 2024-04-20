@@ -1,4 +1,4 @@
-import { useState } from "react";
+import {useState} from "react";
 import styles from "./counter.module.css";
 import personIcon from './../../assets/icon/person.svg';
 
