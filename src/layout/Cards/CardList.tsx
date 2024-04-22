@@ -1,24 +1,32 @@
 import {useEffect, useState} from "react";
-import CardItem, {ICard} from "../../components/card/card.tsx";
+import CardItem from "../../components/card/card.tsx";
 import styles from './card.module.css'
 import {Typography} from "antd";
+import {ECategories, getData} from "../../API/api.ts";
+import {IResponse} from "../../API/response.ts";
 
 const CardList = () => {
-    const [cards, setCards] = useState<ICard[]>([]);
+    const [cards, setCards] = useState<IResponse[]>([]);
 
     useEffect(() => {
-        setCards([...cards, {title: 'Greenough, Montana', image: ''}, {
-            title: 'Greenough, Montana',
-            image: '',
-        }, {title: 'Greenough, Montana', image: ''}, {title: 'Greenough, Montana', image: '4'}])
+        const cardRecommends = async () => {
+            try {
+                const response = await getData(ECategories.Recommended);
+                setCards(response.data);
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        cardRecommends();
+        console.log(cards)
     }, [])
 
     return (
         <div className={'container'}>
             <Typography.Title className={'title'}>Recommended</Typography.Title>
             <div className={styles.cards}>
-                {cards.map((card, index) => (
-                    <CardItem key={index} title={card.title} image={card.image}/>
+                {cards.map((card) => (
+                    <CardItem id={card.id} title={card.destination} image={card.imageUrl}/>
                 ))}
             </div>
         </div>

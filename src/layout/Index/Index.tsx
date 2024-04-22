@@ -1,6 +1,6 @@
 import Intro from "../../components/intro/intro.tsx";
 import CardList from "../Cards/CardList.tsx";
-import Discover from "../../components/tabs/Discover.tsx";
+import Discover from "../../components/discover/Discover.tsx";
 
 const Index = () => {
     return (

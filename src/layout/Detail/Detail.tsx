@@ -7,14 +7,15 @@ import pin from './../../assets/icon/pin.svg';
 import {IReview} from "../../components/review/review.tsx";
 import Reviews from "../Reviews/reviews.tsx";
 import ButtonUI from "../../components/button/button.tsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import ModalContent from "../../components/modalContent/modalContent.tsx";
 import {useAddDispatch, useAppSelector} from "../../redux/hooks.ts";
-import {setPhoneNumber, setCommentOrder} from "../../redux/reducer/modal.ts";
+import {setCommentOrder, setPhoneNumber} from "../../redux/reducer/modal.ts";
+import {getDetailData} from "../../API/api.ts";
 
 const Detail = () => {
     const navigate = useNavigate();
-
+    // const {id} = useParams();
     const handlePrevPage = () => {
         navigate(-1);
     }
@@ -23,6 +24,19 @@ const Detail = () => {
         img: '',
         comment: 'Рандомный комент азазазза'
     }]
+
+    useEffect(() => {
+        const getDetail = async (id: string) => {
+            try {
+                const response = await getDetailData(id);
+                console.log(response)
+            } catch (error) {
+                console.log(error)
+            }
+        }
+
+        getDetail('1');
+    }, [])
 
     const [open, setOpen] = useState<boolean>(false);
     const [openDoneModal, setOpenDoneModal] = useState<boolean>(false);
