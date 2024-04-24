@@ -1,41 +1,36 @@
-import BgImage from './../../assets/image/bgImage.jpg';
 import styles from './detail.module.css';
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import {ArrowLeftOutlined, CloseOutlined} from "@ant-design/icons";
 import {Button, Modal, Typography} from "antd";
 import pin from './../../assets/icon/pin.svg';
-import {IReview} from "../../components/review/review.tsx";
-import Reviews from "../Reviews/reviews.tsx";
 import ButtonUI from "../../components/button/button.tsx";
 import {useEffect, useState} from "react";
 import ModalContent from "../../components/modalContent/modalContent.tsx";
 import {useAddDispatch, useAppSelector} from "../../redux/hooks.ts";
 import {setCommentOrder, setPhoneNumber} from "../../redux/reducer/modal.ts";
 import {getDetailData} from "../../API/api.ts";
+import {IDetailResponse} from "../../API/detailResponse.ts";
+import Reviews from "../Reviews/reviews.tsx";
 
 const Detail = () => {
     const navigate = useNavigate();
-    // const {id} = useParams();
+    const [detail, setDetail] = useState<IDetailResponse>()
+    const {id} = useParams();
     const handlePrevPage = () => {
         navigate(-1);
     }
-    const users: IReview[] = [{username: 'Erlan', img: '', comment: 'Рандомный комент азазазза'}, {
-        username: 'Erlan',
-        img: '',
-        comment: 'Рандомный комент азазазза'
-    }]
 
     useEffect(() => {
         const getDetail = async (id: string) => {
             try {
                 const response = await getDetailData(id);
-                console.log(response)
+                setDetail(response);
             } catch (error) {
-                console.log(error)
+                alert(error)
             }
         }
 
-        getDetail('1');
+        getDetail(`${id}`);
     }, [])
 
     const [open, setOpen] = useState<boolean>(false);
@@ -49,7 +44,7 @@ const Detail = () => {
         dispatch(setPhoneNumber(phone));
     }
 
-    const hadleAddComentOrder = (comment: string) => {
+    const handleAddCommentOrder = (comment: string) => {
         dispatch(setCommentOrder(comment));
     }
 
@@ -79,7 +74,7 @@ const Detail = () => {
 
     return (
         <div className={styles.content}>
-            <header className={styles.intro} style={{backgroundImage: `url(${BgImage})`}}>
+            <header className={styles.intro} style={{backgroundImage: `url(${detail?.data.images[0]})`}}>
                 <div className="container">
                     <button className={styles.prev} onClick={handlePrevPage}>
                         <ArrowLeftOutlined style={{color: 'white', fontFamily: 'Satoshi', fontSize: '1.8rem'}}/>
@@ -91,26 +86,23 @@ const Detail = () => {
                 <div className={'container'}>
                     <div className={styles.content}>
                         <div className={styles.text}>
-                            <Typography.Title>Mount Fuji</Typography.Title>
+                            <Typography.Title>{detail?.data.destination}</Typography.Title>
                             <div className={styles.paragraph}>
                                 <img src={pin} alt={'pin location'}/>
-                                <p>Honshu, Japan</p>
+                                <p>{detail?.data.location}</p>
                             </div>
                         </div>
 
                         <div className={styles.text}>
                             <Typography.Title>Description</Typography.Title>
                             <div className={styles.paragraph}>
-                                <Typography.Text>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dignissim eget
-                                    amet viverra
-                                    eget fames rhoncus. Eget enim venenatis enim porta egestas malesuada et. Consequat
-                                    mauris lacus euismod montes.</Typography.Text>
+                                <Typography.Text>{detail?.data.description}</Typography.Text>
                             </div>
                         </div>
 
                         <div className={styles.text}>
                             <Typography.Title>Reviews</Typography.Title>
-                            <Reviews reviews={users}/>
+                            {detail?.data.reviews && <Reviews reviews={detail?.data.reviews}/>}
                         </div>
                     </div>
                 </div>
@@ -126,16 +118,18 @@ const Detail = () => {
                 closeIcon={<CloseOutlined/>} // Add the close button icon
                 footer={[null]}
             >
-                <ModalContent
+                {id && <ModalContent
+                    id={id}
                     setGood={setGood}
                     setOpenDoneModal={setOpenDoneModal}
                     confirmLoading={confirmLoading}
                     handleOK={handleOK}
                     phoneNumber={phoneNumber}
                     comment={comment}
-                    handleCommentOrder={hadleAddComentOrder}
+                    handleCommentOrder={handleAddCommentOrder}
                     handlePhoneNumber={handleAddPhone}
-                />
+                />}
+
             </Modal>
 
             {/* Modal Done*/}

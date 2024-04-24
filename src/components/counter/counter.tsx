@@ -1,9 +1,13 @@
-import {useState} from "react";
+import React from "react";
 import styles from "./counter.module.css";
 import personIcon from './../../assets/icon/person.svg';
 
-const Counter = () => {
-    const [count, setCount] = useState(1);
+interface ICounter {
+    count: number,
+    setCount: (count: number) => void,
+}
+
+const Counter: React.FC<ICounter> = ({count, setCount}) => {
 
     const handleIncrement = () => {
         setCount(count + 1);

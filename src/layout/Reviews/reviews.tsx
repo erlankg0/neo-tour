@@ -1,7 +1,7 @@
 import styles from "./reviews.module.css";
-import Review, {IReview} from "../../components/review/review.tsx";
+import Review from "../../components/review/review.tsx";
 import React from "react";
-import imagePeople from './../../assets/image/people.jpg'
+import {IReview} from "../../API/review.ts";
 
 interface IReviews {
     reviews: IReview[],
@@ -9,9 +9,10 @@ interface IReviews {
 
 const Reviews: React.FC<IReviews> = ({reviews}) => {
     return (
-        <ul className={styles.reviews}>
+        <ul className={styles.reviews} >
             {reviews.map((review) => (
-                <Review username={review.username} comment={review.comment} img={imagePeople}/>
+                <Review id={review.id} createdDate={review.createdDate} username={review.username}
+                        comment={review.comment}/>
             ))}
         </ul>
     )

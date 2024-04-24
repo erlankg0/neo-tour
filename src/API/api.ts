@@ -1,9 +1,14 @@
 import axios from "axios";
 import {IResponseList} from "./response.ts";
 import {IDetailResponse} from "./detailResponse.ts";
+import {IBooking} from "./booking.ts";
 
 const instance = axios.create({
     baseURL: 'https://phobic-honey-production.up.railway.app/api',
+    headers: {
+        Accept: '*/*',
+        "Content-Type": 'application/json'
+    }
 })
 
 enum ECategories {
@@ -45,5 +50,15 @@ const getDetailData = (id: string): Promise<IDetailResponse> => {
     return instance.get(`/trips/${id}`);
 }
 
-export {getData, getDetailData};
+const booking = (tripId: string, phoneNumber: string, numberOfPeople: number, comment: string) => {
+    const data: IBooking = {
+        tripId,
+        phoneNumber,
+        numberOfPeople,
+        comment
+    }
+    return instance.post('/bookings/book', data)
+}
+
+export {getData, getDetailData, booking};
 export {ECategories};

@@ -11,7 +11,10 @@
     align-items: center;
     justify-content: space-between;
 }
-
+.discoverNavigate{
+    display: flex;
+    justify-content: space-between;
+}
 .arrow-group {
     display: flex;
 }

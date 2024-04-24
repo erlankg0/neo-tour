@@ -1,15 +1,12 @@
 import {Typography} from "antd";
 import React from "react";
 import styles from './review.module.css'
-interface IReview {
-    img: string,
-    username: string,
-    comment: string
-}
+import {IReview} from "../../API/review.ts";
+import img from './../../assets/icon/person.svg'
 
-const Review: React.FC<IReview> = ({img, comment, username}) => {
+const Review: React.FC<IReview> = ({comment, username, id}) => {
     return (
-        <li>
+        <li key={id}>
             <div className={styles.content}>
                 <div className={styles.top}>
                     <img className={styles.image} src={img} alt={username}/>

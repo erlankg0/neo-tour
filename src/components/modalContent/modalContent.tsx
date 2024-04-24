@@ -5,7 +5,8 @@ import {Field, Form, Formik} from "formik";
 import * as Yup from 'yup';
 import Counter from "../counter/counter.tsx";
 import {Button} from "antd";
-import React from "react";
+import React, {useState} from "react";
+import {booking} from "../../API/api.ts";
 
 interface IModal {
     confirmLoading: boolean,
@@ -14,8 +15,9 @@ interface IModal {
     setGood: (isGood: boolean) => void,
     phoneNumber: string,
     comment: string,
+    id: string,
     handlePhoneNumber: (phone: string) => void,
-    handleCommentOrder: (comment: string) => void
+    handleCommentOrder: (comment: string) => void,
 
 }
 
@@ -26,28 +28,29 @@ const ModalContent: React.FC<IModal> = ({
                                             setGood,
                                             phoneNumber,
                                             comment,
+                                            id,
                                             handleCommentOrder,
-                                            handlePhoneNumber
+                                            handlePhoneNumber,
                                         }) => {
+    const [count, setCount] = useState(1);
 
     return (
         <Formik
             initialValues={{
                 phone: phoneNumber,
                 comment: comment,
-                count: 0,
+                count: count,
             }}
             validationSchema={Yup.object().shape({
                 phone: Yup.string().required('Обязательное поле!'),
-                comment: Yup.string().max(100, 'Максимум 100 симоволов'),
-                count: Yup.number().min(1, 'Минимальное бронирование 1 PAX').max(5, 'Максимльное размещение 5 PAX')
+                comment: Yup.string().max(100, 'Максимум 100 символов'),
+                count: Yup.number().min(1, 'Минимальное бронирование 1 PAX').max(5, 'Максимальное размещение 5 PAX')
             })}
-            onSubmit={(values, {resetForm}) => {
-                console.log(values.phone);
-                console.log(values.comment);
-                console.log(values.count, 'PAX');
-                resetForm();
-            }}>
+            onSubmit={() => {
+                setOpenDoneModal(true);
+                setGood(false);
+            }}
+        >
             {() => (
                 <Form className={styles.content}>
                     <h3 className={styles.paragraph}>
@@ -56,35 +59,33 @@ const ModalContent: React.FC<IModal> = ({
                         the number of people for the reservation
                     </h3>
                     <div className={styles.field}>
-                        <label className={styles.label} htmlFor={'phone'}>Phone</label>
-                        <Field type={'input'} as={InputPhone} phoneNumber={phoneNumber}
-                               setPhoneNumber={handlePhoneNumber} name={'phone'}/>
+                        <label className={styles.label} htmlFor="phone">Phone</label>
+                        <Field type="input" as={InputPhone} phoneNumber={phoneNumber} setPhoneNumber={handlePhoneNumber}
+                               name="phone"/>
                     </div>
                     <div className={styles.field}>
-                        <label className={styles.label} htmlFor={'phone'}>Commentaries to trip</label>
-                        <Field type={'input'} as={InputRemark} handleCommentOrder={handleCommentOrder} value={comment}
-                               name={'comment'}/>
+                        <label className={styles.label} htmlFor="comment">Commentaries to trip</label>
+                        <Field type="input" as={InputRemark} handleCommentOrder={handleCommentOrder} value={comment}
+                               name="comment"/>
                     </div>
                     <div className={styles.field}>
-                        <Counter/>
+                        <Counter count={count} setCount={setCount}/>
                     </div>
-                    <Button htmlType={'submit'} key="submit" type="primary" loading={confirmLoading} onClick={handleOK}
-                            style={{
-                                width: '100%',
-                                height: '4.4rem',
-                                backgroundColor: '#6A62B7',
-                                borderRadius: '2rem',
-                                color: 'white'
-                            }} onSubmit={() => {
-                        setOpenDoneModal(true)
-                        setGood(false);
-                    }} className={styles.buttonModal}>
+                    <Button key="submit" type="primary" loading={confirmLoading} onClick={() => {
+                        handleOK();
+                        booking(id, phoneNumber, count, comment).then(res => {
+                            if (res.data == 'Your trip has been booked!') {
+                                setGood(true);
+                            }
+                        }).catch(() => setGood(false));
+                    }} className={styles.buttonModal} htmlType="submit">
                         Book
                     </Button>
                 </Form>
             )}
         </Formik>
-    )
-}
+    );
+};
+
 
 export default ModalContent;
