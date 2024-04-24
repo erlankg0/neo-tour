@@ -7,16 +7,15 @@ import {ECategories, getData} from "../../API/api.ts";
 import {ArrowLeftOutlined, ArrowRightOutlined} from "@ant-design/icons";
 
 interface IDiscover {
-    id: string;
+    forwardedRef: React.RefObject<HTMLDivElement>;
 }
 
-const Discover: React.FC<IDiscover> = ({id}) => {
+const Discover: React.FC<IDiscover> = ({forwardedRef}) => {
     const [filter, setFilter] = useState("popular");
     const [tours, setTours] = useState<IResponse[]>();
     const getTours = async (category: ECategories) => {
         try {
             const response = await getData(category);
-            console.log(response);
             setTours(response.data.slice(0, 3).reverse())
         } catch (error) {
             console.log(error)
@@ -41,16 +40,27 @@ const Discover: React.FC<IDiscover> = ({id}) => {
 
 
     return (
-        <section className={styles.discoverPage} id={id}>
+        <section ref={forwardedRef} className={styles.discoverPage}>
             <div className="container">
                 <div className={styles.discoverTitleGroup}>
                     <Typography.Title className={styles.title}>Discover</Typography.Title>
+
+                    <div className={styles.discoverNavigate}>
+                        <button className={styles.discoverArrow}>
+                            <ArrowLeftOutlined/>
+                        </button>
+                        <button className={styles.discoverArrow}>
+                            <ArrowRightOutlined/>
+                        </button>
+
+                    </div>
                 </div>
 
                 <div className={styles.discoverPageHeader}>
                     <div className={styles.category}>
                         {regions.map(([key, value]) => (
                             <button
+                                key={key}
                                 className={
                                     filter === key ? `${styles.categoryLink} ${styles.active}` : `${styles.categoryLink}`
                                 }
@@ -81,22 +91,13 @@ const Discover: React.FC<IDiscover> = ({id}) => {
                             </button>
                         ))}
                     </div>
-                    <div className={styles.discoverNavigate}>
-                        <button className={styles.discoverArrow}>
-                            <ArrowLeftOutlined/>
-                        </button>
-                        <button className={styles.discoverArrow}>
-                            <ArrowRightOutlined/>
-                        </button>
-
-                    </div>
 
                 </div>
 
                 <div className={styles.discoverListWrapper}>
                     {tours && tours.map((elem) => (
-                        <div className={styles.discoverImgGroup}>
-                            <CardItem title={elem.destination} id={elem.id} image={elem.imageUrl} key={elem.id}/>
+                        <div className={styles.discoverImgGroup}  key={elem.id}>
+                            <CardItem title={elem.destination} id={elem.id} image={elem.imageUrl}/>
                         </div>
                     ))}
                 </div>

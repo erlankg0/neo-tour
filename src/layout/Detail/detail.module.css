@@ -26,9 +26,8 @@
 }
 
 .content {
-    display: flex;
-    flex-direction: column;
-    gap: 4rem;
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
 
     padding-bottom: 4rem;
 }
@@ -42,7 +41,9 @@
     font-family: Satoshi;
     font-size: 1.8rem;
 }
-
+.info{
+    font-size: 3rem;
+}
 .buttonModal {
     color: #FFF;
 

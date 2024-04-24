@@ -12,7 +12,7 @@ const Reviews: React.FC<IReviews> = ({reviews}) => {
         <ul className={styles.reviews} >
             {reviews.map((review) => (
                 <Review id={review.id} createdDate={review.createdDate} username={review.username}
-                        comment={review.comment}/>
+                        comment={review.comment} key={review.id}/>
             ))}
         </ul>
     )

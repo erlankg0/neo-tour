@@ -109,7 +109,7 @@ const Detail = () => {
             </section>
             {/*Modal*/}
             <Modal
-                title={<p>{phoneNumber}</p>}
+                title={<p className={styles.info}>Info</p>}
                 visible={open}
                 onOk={handleOK}
                 confirmLoading={confirmLoading}

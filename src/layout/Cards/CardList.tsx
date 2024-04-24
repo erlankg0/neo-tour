@@ -18,7 +18,6 @@ const CardList = () => {
             }
         }
         cardRecommends();
-        console.log(cards)
     }, [])
 
     return (
@@ -26,7 +25,7 @@ const CardList = () => {
             <Typography.Title className={'title'}>Recommended</Typography.Title>
             <div className={styles.cards}>
                 {cards.map((card) => (
-                    <CardItem id={card.id} title={card.destination} image={card.imageUrl}/>
+                    <CardItem key={card.id} id={card.id} title={card.destination} image={card.imageUrl}/>
                 ))}
             </div>
         </div>
