@@ -73,11 +73,17 @@ const ModalContent: React.FC<IModal> = ({
                     </div>
                     <Button key="submit" type="primary" loading={confirmLoading} onClick={() => {
                         handleOK();
-                        booking(id, phoneNumber, count, comment).then(res => {
-                            if (res.data == 'Your trip has been booked!') {
-                                setGood(true);
-                            }
-                        }).catch(() => setGood(false));
+                        if (phoneNumber.trim().length > 5) {
+                            booking(id, phoneNumber, count, comment).then(res => {
+                                if (res.data == 'Your trip has been booked!') {
+                                    setGood(true);
+                                }
+                            }).catch(() => setGood(false));
+                        } else {
+                            alert('Ошибка надо заполнить номер телефона')
+                            setGood(false)
+                        }
+
                     }} className={styles.buttonModal} htmlType="submit">
                         Book
                     </Button>

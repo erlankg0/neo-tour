@@ -13,7 +13,7 @@ const MainPage = () => {
     return (
         <div>
             <Intro scrollToMyRef={scrollToMyRef}/>
-            <Discover forwardedRef={myRef} id={'tabs'}/>
+            <Discover forwardedRef={myRef}/>
             <CardList/>
         </div>
     )

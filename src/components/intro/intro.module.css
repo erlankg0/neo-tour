@@ -65,3 +65,13 @@
     gap: 2rem;
     align-items: center;
 }
+
+
+@media (max-width: 768px) {
+    .content{
+        flex-direction: column;
+    }
+    .image{
+        width: 100%;
+    }
+}

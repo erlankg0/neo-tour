@@ -68,12 +68,11 @@ const Detail = () => {
         setOpenDoneModal(false);
     }
     const handleCancel = () => {
-        console.log('Clicked cancel button');
         setOpen(false);
     }
 
     return (
-        <div className={styles.content}>
+        <div style={{position: 'relative', width: '100%'}}>
             <header className={styles.intro} style={{backgroundImage: `url(${detail?.data.images[0]})`}}>
                 <div className="container">
                     <button className={styles.prev} onClick={handlePrevPage}>
@@ -82,7 +81,7 @@ const Detail = () => {
                     </button>
                 </div>
             </header>
-            <section>
+            <section className={styles.borderRadius}>
                 <div className={'container'}>
                     <div className={styles.content}>
                         <div className={styles.text}>
@@ -106,6 +105,9 @@ const Detail = () => {
                         </div>
                     </div>
                 </div>
+
+                <ButtonUI text={'Book now'} onClick={handleShowModal}/>
+
             </section>
             {/*Modal*/}
             <Modal
@@ -117,6 +119,7 @@ const Detail = () => {
                 centered
                 closeIcon={<CloseOutlined/>} // Add the close button icon
                 footer={[null]}
+                style={{borderRadius: '3rem'}}
             >
                 {id && <ModalContent
                     id={id}
@@ -156,7 +159,6 @@ const Detail = () => {
             </Modal>
             {/* end Modal Done*/}
 
-            <ButtonUI text={'Book now'} onClick={handleShowModal}/>
 
             {/*Modal*/}
 

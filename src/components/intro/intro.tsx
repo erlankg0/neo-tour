@@ -20,7 +20,7 @@ const Intro: React.FC<IInto> = ({scrollToMyRef}) => {
                                 Enjoy the best experience with us!
                             </p>
                         </div>
-                        <img src={imageIntro} alt={'into Person image'}/>
+                        <img className={styles.image} src={imageIntro} alt={'into Person image'}/>
                     </div>
                     <div className={styles.button} onClick={scrollToMyRef}>Let’s Go!<ArrowRightOutlined/></div>
                 </div>
